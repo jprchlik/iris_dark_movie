@@ -7,7 +7,7 @@ from multiprocessing import Pool
 
 class create_movie:
 
-    def __init__(self,odir='',pdir='track_plots/',ext='png',nproc=1,w0=1024,h0=1024,frate=10,outmov='movie.mp4'):
+    def __init__(self,odir='',pdir='dark_plots/',ext='png',nproc=1,w0=1024,h0=1024,frate=10,outmov='movie.mp4'):
 
         if pdir[-1] != '/': pdir = pdir+'/'
         if odir == '': odir = os.getcwd()
