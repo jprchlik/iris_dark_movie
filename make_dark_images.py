@@ -33,6 +33,8 @@ class dark_plot:
         self.process = False
 
         self.resdict = {}
+
+
         for i in restrict:
             split = i.split(':')
             
@@ -55,6 +57,10 @@ class dark_plot:
             if os.path.isfile(self.ofile) == False: self.process = True
         else:
             self.process = True
+
+        if self.process:
+            if self.fits.header['INSTRUME'] != self.itype: self.process = False
+
 
         if self.process:
        
