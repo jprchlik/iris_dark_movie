@@ -51,19 +51,21 @@ class create_movie:
 #            pool.map(self.create_links,index)
 #            pool.close()
 #        if self.nproc == 1:
-        for j in index: self.create_links(j)
+        k = 0 #add an additive index that only increases when passing
+        for j in index: k = self.create_links(j,k)
 #make sure nproc is greater than or equal to 1
 #        if self.nproc < 1: 
 #            print 'Need to have at least 1 processor allocated'
 #            raise   
 #use index to create formated symbolic links numerically increasing
-    def create_links(self,index):
+    def create_links(self,index,k):
         try:
             ifile = os.getcwd()+'/'+self.files[index]
-            os.symlink(ifile,'{0}/seq'.format(self.sdir)+self.sfmt.format(index).replace(' ','0'))
+            os.symlink(ifile,'{0}/seq'.format(self.sdir)+self.sfmt.format(k).replace(' ','0'))
+            return k+1 
         except TypeError:
             print 'File did not pass quality checks'
-            return
+            return k
            
 
 #write ffmpeg to file
