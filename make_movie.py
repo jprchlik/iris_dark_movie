@@ -7,7 +7,7 @@ from multiprocessing import Pool
 
 class create_movie:
 
-    def __init__(self,odir='',pdir='dark_plots/',ext='png',nproc=1,w0=1024,h0=1024,frate=10,outmov='movie.mp4'):
+    def __init__(self,files,odir='',pdir='dark_plots/',ext='png',nproc=1,w0=1024,h0=1024,frate=10,outmov='movie.mp4'):
 
         if pdir[-1] != '/': pdir = pdir+'/'
         if odir == '': odir = os.getcwd()
@@ -24,6 +24,8 @@ class create_movie:
         self.nproc= nproc
         self.ext  = ext
         self.sdir = pdir+'symlinks'
+#files to make the movie from
+        self.files = files
 #remove the previous direcotry with symlinks
         shutil.rmtree(self.sdir)
 #readd symlinks directory
@@ -33,7 +35,7 @@ class create_movie:
 
 #gather files for creating symbolic links
     def gather_files(self):
-        self.files = glob.glob('{0}*.{1}'.format(self.pdir,self.ext))
+#        self.files = glob.glob('{0}*.{1}'.format(self.pdir,self.ext))
         try:
             self.lengs = str(int(1+np.log10(len(self.files)))) # get the number of sig figs for file format
         except OverflowError:
