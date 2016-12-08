@@ -10,7 +10,7 @@ import numpy as np
 
 class dark_plot:
 
-    def __init__(self,ifile,pdir='dark_plots/',scale=1,restrict=['EXPTIME:0'],itype='NUV',ext='png',clobber=False,vmin=89.,vmax=150.):
+    def __init__(self,ifile,pdir='dark_plots/',scale=1,restrict=['INT_TIME:0'],itype='NUV',ext='png',clobber=False,vmin=89.,vmax=150.):
 
 
         if pdir[-1] != '/': pdir = pdir+'/'
@@ -73,7 +73,7 @@ class dark_plot:
             for i in self.resdict.keys():
 
                 try:
-                    if self.fits.header[i] ==  float(self.resdict[i]):
+                    if self.fits.header[i] <= float(self.resdict[i])+0.5:
                         self.process = True 
                     else:
                         self.process = False
@@ -93,7 +93,7 @@ class dark_plot:
                        vmax=self.vmax,vmin=self.vmin,
                        cmap=plt.cm.gray,origin='lower')
 
-        self.ax.text(10,10,self.fits.header['DATE_OBS']+', Exp {0:3.1f}s'.format(self.fits.header['EXPTIME'])
+        self.ax.text(10,10,self.fits.header['DATE_OBS']+', Exp {0:3.1f}s'.format(self.fits.header['INT_TIME'])
                      ,color='white',weight='bold',zorder=5000,fontsize=24)
 
         self.save_figure()
