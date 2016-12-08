@@ -5,7 +5,7 @@ import numpy as np
 
 
 
-class dark_data:
+class dark_files:
 
 
     def __init__(self,start='2012/01/01',end='3001/01/01',
