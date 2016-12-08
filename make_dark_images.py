@@ -90,7 +90,7 @@ class dark_plot:
                        vmax=self.vmax,vmin=self.vmin,
                        cmap=plt.cm.gray,origin='lower')
 
-        self.ax.text(10,10,self.fits.header['DATE-OBS']+', Exp {0:3.1f}'.format(self.fits.header['EXPTIME'])
+        self.ax.text(10,10,self.fits.header['DATE-OBS']+', Exp {0:3.1f}s'.format(self.fits.header['EXPTIME'])
                      ,color='white',weight='bold',zorder=5000,fontsize=24)
 
         self.save_figure()
