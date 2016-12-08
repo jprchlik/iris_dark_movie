@@ -1,4 +1,3 @@
-from astropy.io import fits
 import glob
 from datetime import datetime,timedelta
 import numpy as np
@@ -11,7 +10,7 @@ class dark_files:
     def __init__(self,start='2012/01/01',end='3001/01/01',
                  lev1dir='/data/alisdair/IRIS_LEVEL1_DARKS/',
                  lev0dir='/data/alisdair/opabina/scratch/joan/iris/newdat/orbit/level0/',
-                 typed='simpleB',clobber=False):
+                 typed='simpleB'):
 
 
         start,end = start.split('/'),end.split('/')
