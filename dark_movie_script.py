@@ -6,7 +6,7 @@ from make_movie import create_movie
 itype = 'NUV'
 def run_images(ifile):
 
-    out =dark_plot(ifile,clobber=True,itype=itype,restrict=['EXPTIME:0'])
+    out =dark_plot(ifile,clobber=True ,itype=itype,restrict=['EXPTIME:0'],vmin=90,vmax=125)
     
     if out.process:
         return out.ofile
@@ -18,7 +18,7 @@ darks = dark_files()
 
 nproc = 8
 
-fdark = darks.lev0fil[-88:]
+fdark = darks.lev0fil#[-88:]
 
 pool = Pool(processes=nproc)
 ofiles = pool.map(run_images,fdark)
