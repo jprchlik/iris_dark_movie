@@ -79,7 +79,9 @@ class dark_plot:
 
         self.ax.imshow(self.fits.data,
                        vmax=self.vmax,vmin=self.vmin,
-                       cmap=plt.cm.gray)
+                       cmap=plt.cm.gray,origin='lower')
+
+        self.ax.text(10,10,self.fits.header['DATE-OBS'],color='white',weight='bold',zorder=5000,fontsize=24)
 
         self.save_figure()
 
