@@ -58,9 +58,13 @@ class create_movie:
 #            raise   
 #use index to create formated symbolic links numerically increasing
     def create_links(self,index):
-        ifile = os.getcwd()+'/'+self.files[index]
-        os.symlink(ifile,'{0}/seq'.format(self.sdir)+self.sfmt.format(index).replace(' ','0'))
-
+        try:
+            ifile = os.getcwd()+'/'+self.files[index]
+            os.symlink(ifile,'{0}/seq'.format(self.sdir)+self.sfmt.format(index).replace(' ','0'))
+        except TypeError:
+            print 'File did not pass quality checks'
+            return
+           
 
 #write ffmpeg to file
     def write_ffmpeg(self):
