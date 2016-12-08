@@ -59,7 +59,6 @@ class dark_plot:
         if self.process:
        
             for i in self.resdict.keys():
-                print self.fits.header[i],float(self.resdict[i])
                 if self.fits.header[i] ==  float(self.resdict[i]):
                     self.process = True 
                 else:
