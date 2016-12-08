@@ -6,7 +6,7 @@ from make_movie import create_movie
 itype = 'NUV'
 def run_images(ifile):
 
-    out =dark_plot(ifile,clobber=True ,itype=itype,restrict=['EXPTIME:0'],vmin=90,vmax=125)
+    out =dark_plot(ifile,clobber=True,itype=itype,vmin=90,vmax=125)
     
     if out.process:
         return out.ofile
