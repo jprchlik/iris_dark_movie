@@ -10,7 +10,7 @@ import numpy as np
 
 class dark_plot:
 
-    def __init__(self,ifile,pdir='dark_plots/',scale=1,restrict=['EXPTIME:0'],itype='NUV',ext='png',clobber=False):
+    def __init__(self,ifile,pdir='dark_plots/',scale=1,restrict=['EXPTIME:0'],itype='NUV',ext='png',clobber=False,vmin=89.,vmax=150.):
 
 
         if pdir[-1] != '/': pdir = pdir+'/'
@@ -27,6 +27,8 @@ class dark_plot:
         fname = ifile.split('/')[-1]
         self.ofile = self.pdir+fname.replace('fits',ext)
 
+#static vmin and vmax
+        self.vmin, self.vmax = vmin,vmax
         
 
 #Whether to create the image or not
@@ -48,7 +50,8 @@ class dark_plot:
         if self.process:
             self.plot_dark()
         else:
-            print "FAILED"
+#if the only reason the file fails is because it is already created keep it in the list for the movie
+            self.process = os.path.isfile(self.ofile) 
 
 
     def check_restrict(self):
@@ -87,7 +90,8 @@ class dark_plot:
                        vmax=self.vmax,vmin=self.vmin,
                        cmap=plt.cm.gray,origin='lower')
 
-        self.ax.text(10,10,self.fits.header['DATE-OBS'],color='white',weight='bold',zorder=5000,fontsize=24)
+        self.ax.text(10,10,self.fits.header['DATE-OBS']+', Exp {0:3.1f}'.format(self.fits.header['EXPTIME'])
+                     ,color='white',weight='bold',zorder=5000,fontsize=24)
 
         self.save_figure()
 
@@ -99,7 +103,8 @@ class dark_plot:
         
         self.fig, self.ax = plt.subplots(figsize=(self.x,self.y),dpi=self.dpi)
 
-        self.vmin,self.vmax = self.fits.header['DATAMEAN']+3.*self.fits.header['DATARMS']*np.array([-1.,1.])
+        #use static values
+        #self.vmin,self.vmax = self.fits.header['DATAMEAN']+3.*self.fits.header['DATARMS']*np.array([-1.,1.])
 
         #set sun to fill entire range
         self.fig.subplots_adjust(left=0,bottom=0,right=1,top=1)
