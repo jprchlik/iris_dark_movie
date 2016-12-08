@@ -62,7 +62,10 @@ class dark_plot:
             self.process = True
 
         if self.process:
-            if self.fits.header['INSTRUME'] != self.itype: self.process = False
+            try:
+                if self.fits.header['INSTRUME'] != self.itype: self.process = False
+            except KeyError:
+                self.process = False
 
 
         if self.process:
@@ -90,7 +93,7 @@ class dark_plot:
                        vmax=self.vmax,vmin=self.vmin,
                        cmap=plt.cm.gray,origin='lower')
 
-        self.ax.text(10,10,self.fits.header['DATE-OBS']+', Exp {0:3.1f}s'.format(self.fits.header['EXPTIME'])
+        self.ax.text(10,10,self.fits.header['DATE_OBS']+', Exp {0:3.1f}s'.format(self.fits.header['EXPTIME'])
                      ,color='white',weight='bold',zorder=5000,fontsize=24)
 
         self.save_figure()
