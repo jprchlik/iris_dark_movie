@@ -6,7 +6,7 @@ from make_movie import create_movie
 
 def run_images(ifile):
     
-    out =dark_plot(ifile,clobber=True,itype=itype,vmin=-10,vmax=15,pdir='model_sub_plots/')
+    out =dark_plot(ifile,clobber=True,itype=itype,vmin=-5,vmax=5,pdir='model_sub_plots/')
     if out.process:
         return out.ofile
     else:
